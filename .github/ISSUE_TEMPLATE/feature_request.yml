@@ -1,0 +1,22 @@
+name: 功能建議
+description: 想讓 FamilyHelper 多做些什麼
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你想解決什麼問題
+      description: 例如「長輩常常找不到…」
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: 你的想法
+  - type: checkboxes
+    id: principles
+    attributes:
+      label: 確認
+      options:
+        - label: 這個建議不需要繞過長輩的逐次同意，也不會讓遠端操作系統設定或權限畫面
+          required: true

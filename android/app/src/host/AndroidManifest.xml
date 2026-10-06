@@ -1,0 +1,66 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Only for grandma-approved home/work leave-arrive alerts; never a route. -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE" />
+    <uses-permission android:name="android.permission.health.READ_OXYGEN_SATURATION" />
+    <uses-permission android:name="android.permission.health.READ_SLEEP" />
+    <!-- Only after grandma's own consent and her turning on usage access in system settings. -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+        <!-- Names of apps with a home-screen icon, for the usage list. -->
+        <intent><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent>
+    </queries>
+    <application android:name="com.familyhelper.HostApplication" tools:replace="android:name">
+        <service android:name="com.familyhelper.HostAccessibilityService" android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:label="FamilyHelper 遠端協助">
+            <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility_service" />
+        </service>
+        <service android:name="com.familyhelper.MediaCaptureService" android:exported="false" android:foregroundServiceType="mediaProjection" />
+        <service android:name="com.familyhelper.ForegroundHelperService" android:exported="false" android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="User enabled family assistance standby; visible notification; no screen or microphone capture while idle" />
+        </service>
+        <service android:name="com.familyhelper.battery.BatteryJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" />
+        <service android:name="com.familyhelper.care.CareKickJob"
+            android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" />
+        <receiver android:name="com.familyhelper.care.CareActionReceiver" android:exported="false" />
+        <receiver android:name="com.familyhelper.care.GeofenceReceiver" android:exported="false" />
+        <service android:name="com.familyhelper.care.PlaceReportJob"
+            android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" />
+        <service android:name="com.familyhelper.care.StatusJob"
+            android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" />
+        <service android:name="com.familyhelper.care.RingJob"
+            android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" />
+        <receiver android:name="com.familyhelper.care.RingStopReceiver" android:exported="false" />
+        <receiver android:name="com.familyhelper.care.HostPushReceiver" android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter><action android:name="com.google.android.c2dm.intent.RECEIVE" /></intent-filter>
+        </receiver>
+        <receiver android:name="com.familyhelper.battery.BatteryBootReceiver" android:exported="true">
+            <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter>
+        </receiver>
+        <activity android:name="com.familyhelper.widget.WidgetActionActivity" android:exported="false" android:theme="@android:style/Theme.NoDisplay" />
+        <receiver android:name="com.familyhelper.widget.SosWidget" android:exported="false" android:label="SOS 緊急求助">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/sos_widget_info" />
+        </receiver>
+        <receiver android:name="com.familyhelper.widget.CallWidget" android:exported="false" android:label="呼叫家人">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/call_widget_info" />
+        </receiver>
+        <activity android:name="com.familyhelper.health.PrivacyActivity" android:exported="true">
+            <intent-filter><action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" /></intent-filter>
+        </activity>
+        <activity-alias android:name="com.familyhelper.health.ViewPermissionUsageActivity" android:exported="true"
+            android:targetActivity="com.familyhelper.health.PrivacyActivity" android:permission="android.permission.START_VIEW_PERMISSION_USAGE">
+            <intent-filter><action android:name="android.intent.action.VIEW_PERMISSION_USAGE" /><category android:name="android.intent.category.HEALTH_PERMISSIONS" /></intent-filter>
+        </activity-alias>
+    </application>
+</manifest>

@@ -1,0 +1,44 @@
+name: 問題回報
+description: App 或設定精靈出現錯誤
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        安全漏洞請不要在這裡回報，請改用 Security → Report a vulnerability。
+        請勿貼上金鑰、密碼、配對碼、google-services.json 或家人的個人資料。
+  - type: dropdown
+    id: where
+    attributes:
+      label: 發生在哪裡
+      options: [長輩版 App, 家人版 App, 設定精靈 tool/setup.py, 後端 Functions, 其他]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 發生了什麼事
+      description: 你做了什麼、預期看到什麼、實際看到什麼
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 重現步驟
+      placeholder: |
+        1. 在長輩手機按「呼叫家人」
+        2. …
+  - type: input
+    id: device
+    attributes:
+      label: 手機型號與 Android 版本
+      placeholder: 例如 Samsung A54 / Android 14
+  - type: input
+    id: version
+    attributes:
+      label: App 版本或 commit
+  - type: textarea
+    id: logs
+    attributes:
+      label: 錯誤訊息或截圖
+      description: 請先遮蓋個人資料

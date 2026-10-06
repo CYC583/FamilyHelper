@@ -1,0 +1,37 @@
+name: "💡 分享長輩需求 / Share an elder's need"
+description: 你家長輩有什麼困擾，是程式可以幫上忙的？ / What does an elderly person in your life struggle with that software could help?
+title: "[長輩需求 / Elder need] "
+labels: [elder-need]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        謝謝你分享！不需要懂程式，用自己的話描述就好。請勿填寫真實姓名、地址、電話等個人資料。
+        Thank you for sharing! No technical knowledge needed — just describe it in your own words. Please don't include real names, addresses or phone numbers.
+  - type: textarea
+    id: situation
+    attributes:
+      label: 長輩的情況 / The situation
+      description: 例如：一個人住、看不清楚小字、常忘記吃藥、聽不到通知聲… / e.g. lives alone, can't read small text, forgets medicine, misses notification sounds…
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: 遇到的困難或希望的幫助 / The problem or the help you wish for
+      description: 現在怎麼處理？最困擾的是什麼？ / How do you handle it today? What's hardest?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: 你想像的解法（選填） / Your idea for a solution (optional)
+  - type: dropdown
+    id: phone
+    attributes:
+      label: 長輩用的手機 / The elder's phone
+      options:
+        - Android
+        - iPhone
+        - 沒有智慧型手機 / No smartphone
+        - 不確定 / Not sure

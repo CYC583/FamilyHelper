@@ -1,0 +1,4 @@
+<Button xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/widget_button"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:minHeight="120dp"
+    android:backgroundTint="#A61F2A" android:textColor="#FFFFFF" android:textSize="28sp"
+    android:text="SOS\n緊急求助" android:contentDescription="SOS 緊急求助，通知已配對的家人" />

@@ -1,0 +1,4 @@
+storePassword=REPLACE_WITH_YOUR_PASSWORD
+keyPassword=REPLACE_WITH_YOUR_PASSWORD
+keyAlias=familyhelper
+storeFile=familyhelper-release.jks

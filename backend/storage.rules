@@ -1,0 +1,9 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Care photos are accessible only through consent-gated callable Functions.
+    match /{objectPath=**} {
+      allow read, write: if false;
+    }
+  }
+}

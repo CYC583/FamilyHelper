@@ -1,0 +1,228 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "core": {
+      "devices": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid"
+        }
+      },
+      "links": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid"
+        }
+      },
+      "families": {
+        "$host": {
+          ".read": "auth != null && (auth.uid === $host || data.child('members').child(auth.uid).exists())"
+        }
+      },
+      "sessions": {
+        "$sid": {
+          ".read": "auth != null && (auth.uid === root.child('core').child('sessions').child($sid).child('hostId').val() || (auth.uid === root.child('core').child('sessions').child($sid).child('clientId').val() && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('members').child(auth.uid).exists()))"
+        }
+      }
+    },
+    "care": {
+      "$host": {
+        "settings": {
+          "weather": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "reminders": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "reminderPlan": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          }
+        },
+        "battery": {
+          "consent": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "latest": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('battery').child('consent').child('enabled').val() === true && root.child('care').child($host).child('battery').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('battery').child('consent').child('disclosureVersion').val() === 2))"
+          },
+          "episode": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('battery').child('consent').child('enabled').val() === true && root.child('care').child($host).child('battery').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('battery').child('consent').child('disclosureVersion').val() === 2))"
+          },
+          "events": {
+            ".indexOn": [
+              "createdAt"
+            ],
+            ".read": "auth != null && query.orderByChild === 'createdAt' && query.limitToLast != null && query.limitToLast <= 50 && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('battery').child('consent').child('enabled').val() === true && root.child('care').child($host).child('battery').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('battery').child('consent').child('disclosureVersion').val() === 2))",
+            "$eventId": {
+              ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('battery').child('consent').child('enabled').val() === true && root.child('care').child($host).child('battery').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('battery').child('consent').child('disclosureVersion').val() === 2))"
+            }
+          },
+          "preferences": {
+            "$uid": {
+              ".read": "auth != null && auth.uid === $uid && root.child('core').child('devices').child($uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child($uid).exists() && root.child('core').child('links').child($uid).child('hostId').val() === $host"
+            }
+          }
+        },
+        "companion": {
+          "consent": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "responses": {
+            "$day": {
+              ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('companion').child('consent').child('enabled').val() === true && root.child('care').child($host).child('companion').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('companion').child('consent').child('disclosureVersion').val() === 1 && root.child('care').child($host).child('companion').child('consent').child('items').child('responses').val() === true))"
+            }
+          },
+          "mood": {
+            "$day": {
+              ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('companion').child('consent').child('enabled').val() === true && root.child('care').child($host).child('companion').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('companion').child('consent').child('disclosureVersion').val() === 1 && root.child('care').child($host).child('companion').child('consent').child('items').child('mood').val() === true))"
+            }
+          },
+          "sound": {
+            "latest": {
+              ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('companion').child('consent').child('enabled').val() === true && root.child('care').child($host).child('companion').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('companion').child('consent').child('disclosureVersion').val() === 1 && root.child('care').child($host).child('companion').child('consent').child('items').child('sound').val() === true))"
+            }
+          },
+          "liveness": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('battery').child('consent').child('enabled').val() === true && root.child('care').child($host).child('battery').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('battery').child('consent').child('disclosureVersion').val() === 2))"
+          }
+        },
+        "messages": {
+          "items": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          }
+        },
+        "photoReactions": {
+          "$mediaId": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('core').child('families').child($host).child('photoConsent').child('enabled').val() === true))"
+          }
+        },
+        "voiceProfiles": {
+          ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+        },
+        "places": {
+          "consent": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "events": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('places').child('consent').child('enabled').val() === true && root.child('care').child($host).child('places').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('places').child('consent').child('disclosureVersion').val() === 1))"
+          }
+        },
+        "contacts": {
+          ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+        },
+        "reminderStatus": {
+          "sync": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "days": {
+            "$day": {
+              ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+            }
+          }
+        },
+        "handling": {
+          ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+        },
+        "location": {
+          "consent": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "latest": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('location').child('consent').child('enabled').val() === true && root.child('care').child($host).child('location').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('location').child('consent').child('disclosureVersion').val() === 1))"
+          },
+          "ring": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('location').child('consent').child('enabled').val() === true && root.child('care').child($host).child('location').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('location').child('consent').child('disclosureVersion').val() === 1))"
+          }
+        },
+        "appUsage": {
+          "consent": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host))"
+          },
+          "days": {
+            ".read": "auth != null && root.child('core').child('devices').child($host).child('role').val() === 'host' && (auth.uid === $host || (root.child('core').child('devices').child(auth.uid).child('role').val() === 'client' && root.child('core').child('families').child($host).child('members').child(auth.uid).exists() && root.child('core').child('links').child(auth.uid).child('hostId').val() === $host && root.child('care').child($host).child('appUsage').child('consent').child('enabled').val() === true && root.child('care').child($host).child('appUsage').child('consent').child('status').val() === 'enabled' && root.child('care').child($host).child('appUsage').child('consent').child('disclosureVersion').val() === 1))"
+          }
+        }
+      }
+    },
+    "pushTokens": {
+      ".read": false,
+      ".write": false
+    },
+    "signals": {
+      "$sid": {
+        ".read": "auth != null && root.child('core').child('sessions').child($sid).child('status').val() === 'accepted' && root.child('core').child('sessions').child($sid).child('expiresAt').val() > now && root.child('core').child('sessions').child($sid).child('leaseUntil').val() > now && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('activeSessionId').val() === $sid && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('members').child(root.child('core').child('sessions').child($sid).child('clientId').val()).exists() && (auth.uid === root.child('core').child('sessions').child($sid).child('hostId').val() || auth.uid === root.child('core').child('sessions').child($sid).child('clientId').val())",
+        "offer": {
+          "sdp": {
+            ".validate": "newData.isString() && newData.val().length <= 131072"
+          },
+          "type": {
+            ".validate": "newData.val() === 'offer'"
+          },
+          "$other": {
+            ".validate": false
+          },
+          "screenStreamId": {
+            ".validate": "newData.isString() && newData.val().length <= 128"
+          },
+          ".write": "auth != null && root.child('core').child('sessions').child($sid).child('status').val() === 'accepted' && root.child('core').child('sessions').child($sid).child('expiresAt').val() > now && root.child('core').child('sessions').child($sid).child('leaseUntil').val() > now && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('activeSessionId').val() === $sid && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('members').child(root.child('core').child('sessions').child($sid).child('clientId').val()).exists() && auth.uid === root.child('core').child('sessions').child($sid).child('hostId').val() && !data.exists() && newData.exists()",
+          ".validate": "newData.hasChildren(['sdp','type','screenStreamId'])"
+        },
+        "answer": {
+          "sdp": {
+            ".validate": "newData.isString() && newData.val().length <= 131072"
+          },
+          "type": {
+            ".validate": "newData.val() === 'answer'"
+          },
+          "$other": {
+            ".validate": false
+          },
+          ".write": "auth != null && root.child('core').child('sessions').child($sid).child('status').val() === 'accepted' && root.child('core').child('sessions').child($sid).child('expiresAt').val() > now && root.child('core').child('sessions').child($sid).child('leaseUntil').val() > now && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('activeSessionId').val() === $sid && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('members').child(root.child('core').child('sessions').child($sid).child('clientId').val()).exists() && auth.uid === root.child('core').child('sessions').child($sid).child('clientId').val() && !data.exists() && newData.exists()",
+          ".validate": "newData.hasChildren(['sdp','type'])"
+        },
+        "ice": {
+          "host": {
+            "$candidate": {
+              ".write": "auth != null && root.child('core').child('sessions').child($sid).child('status').val() === 'accepted' && root.child('core').child('sessions').child($sid).child('expiresAt').val() > now && root.child('core').child('sessions').child($sid).child('leaseUntil').val() > now && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('activeSessionId').val() === $sid && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('members').child(root.child('core').child('sessions').child($sid).child('clientId').val()).exists() && auth.uid === root.child('core').child('sessions').child($sid).child('hostId').val() && !data.exists() && newData.exists() && $candidate.matches(/^(0|[1-9][0-9]?|1[01][0-9]|12[0-7])$/)",
+              ".validate": "newData.hasChildren(['candidate'])",
+              "candidate": {
+                ".validate": "newData.isString() && newData.val().length <= 4096"
+              },
+              "sdpMid": {
+                ".validate": "newData.isString() && newData.val().length <= 32"
+              },
+              "sdpMLineIndex": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 16"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          },
+          "client": {
+            "$candidate": {
+              ".write": "auth != null && root.child('core').child('sessions').child($sid).child('status').val() === 'accepted' && root.child('core').child('sessions').child($sid).child('expiresAt').val() > now && root.child('core').child('sessions').child($sid).child('leaseUntil').val() > now && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('activeSessionId').val() === $sid && root.child('core').child('families').child(root.child('core').child('sessions').child($sid).child('hostId').val()).child('members').child(root.child('core').child('sessions').child($sid).child('clientId').val()).exists() && auth.uid === root.child('core').child('sessions').child($sid).child('clientId').val() && !data.exists() && newData.exists() && $candidate.matches(/^(0|[1-9][0-9]?|1[01][0-9]|12[0-7])$/)",
+              ".validate": "newData.hasChildren(['candidate'])",
+              "candidate": {
+                ".validate": "newData.isString() && newData.val().length <= 4096"
+              },
+              "sdpMid": {
+                ".validate": "newData.isString() && newData.val().length <= 32"
+              },
+              "sdpMLineIndex": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 16"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "avatars": {
+      "$host": {
+        ".read": "auth != null && (auth.uid === $host || root.child('core').child('families').child($host).child('members').child(auth.uid).exists())"
+      }
+    }
+  }
+}

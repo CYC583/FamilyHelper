@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'dev.flutter.flutter-gradle-plugin'
+}
+// FirebaseOptions are supplied through --dart-define-from-file. The matching
+// google-services files are additionally needed by background FCM on Android.
+if (file('src/host/google-services.json').exists() && file('src/client/google-services.json').exists()) {
+    apply plugin: 'com.google.gms.google-services'
+}
+def signing = new Properties()
+def signingFile = rootProject.file('key.properties')
+if (signingFile.exists()) signingFile.withInputStream { signing.load(it) }
+
+android {
+    namespace 'com.familyhelper'
+    compileSdk 36
+    ndkVersion flutter.ndkVersion
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+    kotlinOptions { jvmTarget = '17' }
+    defaultConfig {
+        applicationId 'com.familyhelper'
+        minSdk 26
+        targetSdk 36
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+    flavorDimensions 'role'
+    productFlavors {
+        host { dimension 'role'; applicationId 'com.familyhelper.host'; resValue 'string', 'app_name', 'FamilyHelper 長輩' }
+        client { dimension 'role'; applicationId 'com.familyhelper.client'; resValue 'string', 'app_name', 'FamilyHelper 家人' }
+    }
+    signingConfigs {
+        release {
+            if (signingFile.exists()) {
+                storeFile rootProject.file(signing['storeFile'])
+                storePassword signing['storePassword']
+                keyAlias signing['keyAlias']
+                keyPassword signing['keyPassword']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    buildFeatures { buildConfig true }
+}
+gradle.taskGraph.whenReady { graph ->
+    if (graph.allTasks.any { it.name.toLowerCase().contains('release') } && !signingFile.exists()) {
+        throw new GradleException('Release signing is not configured. Create android/key.properties (see README).')
+    }
+}
+flutter { source '../..' }
+dependencies {
+    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.activity:activity-ktx:1.10.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.1'
+    hostImplementation 'androidx.health.connect:connect-client:1.1.0'
+    // Match firebase_core 3.15.2's bundled BOM; background host jobs must use
+    // the same native Auth/Functions SDK instances as FlutterFire.
+    hostImplementation platform('com.google.firebase:firebase-bom:33.16.0')
+    hostImplementation 'com.google.firebase:firebase-auth'
+    hostImplementation 'com.google.firebase:firebase-functions'
+    hostImplementation 'com.google.firebase:firebase-database'
+    // Same version geolocator already ships; used only for home/work geofences.
+    hostImplementation 'com.google.android.gms:play-services-location:21.2.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+}

@@ -1,0 +1,41 @@
+name: familyhelper
+description: Consent-based family remote assistance for Android.
+publish_to: none
+version: 1.6.1+14
+environment:
+  sdk: '>=3.8.0 <4.0.0'
+  flutter: '>=3.32.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_webrtc: 1.6.2+hotfix.3
+  firebase_core: 3.15.2
+  firebase_auth: 5.7.0
+  firebase_database: 11.3.10
+  firebase_messaging: 15.2.10
+  cloud_functions: 5.6.2
+  flutter_local_notifications: 19.3.0
+  shared_preferences: 2.5.3
+  # Pin Android implementations to this project's Kotlin/Gradle generation.
+  shared_preferences_android: 2.4.10
+  path_provider_android: 2.2.18
+  path_provider: 2.1.5
+  permission_handler: 12.0.1
+  geolocator: 14.0.2
+  image: 4.10.1
+  flutter_map: ^8.3.2
+  latlong2: ^0.10.1
+  image_picker: ^1.2.2
+  # Widgets and Health Connect are implemented in host-only Kotlin.
+  # android_widgets / health_connect are intentionally not required.
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 5.0.0
+  firebase_core_platform_interface: 6.0.3
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/

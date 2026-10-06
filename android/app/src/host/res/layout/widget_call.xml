@@ -1,0 +1,4 @@
+<Button xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/widget_button"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:minHeight="120dp"
+    android:backgroundTint="#125C49" android:textColor="#FFFFFF" android:textSize="28sp"
+    android:text="呼叫家人" android:contentDescription="開啟 FamilyHelper 並通知家人" />

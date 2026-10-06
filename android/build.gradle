@@ -1,0 +1,22 @@
+allprojects { repositories { google(); mavenCentral() } }
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.evaluationDependsOn(':app')
+    // Exact-version upstream source + one local revocation notification patch.
+    // The replacement sits at the source root so this relative exclusion only
+    // excludes upstream's nested path. Never modifies the user's pub cache.
+    if (project.name == 'flutter_webrtc') {
+        project.afterEvaluate {
+            def pluginSpec = new File(project.projectDir.parentFile, 'pubspec.yaml').text
+            if (!pluginSpec.contains('version: 1.6.2+hotfix.3')) {
+                throw new GradleException('Update the FamilyHelper MediaProjection patch before changing flutter_webrtc version.')
+            }
+            android.sourceSets.main.java {
+                exclude 'com/cloudwebrtc/webrtc/GetUserMediaImpl.java'
+                srcDir rootProject.file('webrtc_patch')
+            }
+        }
+    }
+}
+tasks.register('clean', Delete) { delete rootProject.buildDir }

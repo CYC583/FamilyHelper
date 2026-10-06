@@ -1,0 +1,49 @@
+name: Verify source
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: python3 -m unittest discover -s tool/tests -p 'test_*.py'
+      - run: flutter analyze
+      - run: flutter test
+      # No credentials required to compile. These APKs show setup instructions
+      # and are NOT usable as configured FamilyHelper clients.
+      - run: flutter build apk --debug --flavor host -t lib/main_host.dart
+      - run: flutter build apk --debug --flavor client -t lib/main_client.dart
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+        working-directory: backend/functions
+      - run: npm test
+        working-directory: backend/functions
+      - name: Prepare demo-only emulator settings
+        run: |
+          install -m 600 backend/ci/emulator.env backend/functions/.env.local
+          install -m 600 backend/ci/emulator.secret backend/functions/.secret.local
+      - run: npx --yes firebase-tools@15.26.0 emulators:exec --only database --project demo-familyhelper 'cd functions && npm run test:rules'
+        working-directory: backend
+      - run: npx --yes firebase-tools@15.26.0 emulators:exec --only auth,functions,database --project demo-familyhelper 'cd functions && npm run test:callables'
+        working-directory: backend
+      - run: npx --yes firebase-tools@15.26.0 emulators:exec --only auth,functions,database,storage --project demo-familyhelper 'cd functions && npm run test:photo-callables'
+        working-directory: backend

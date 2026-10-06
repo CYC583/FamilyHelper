@@ -1,0 +1,34 @@
+.dart_tool/
+.flutter-plugins*
+build/
+android/.gradle/
+android/local.properties
+android/key.properties
+*.jks
+*.keystore
+android/app/src/*/google-services.json
+config/host.json
+config/client.json
+backend/.firebaserc
+backend/functions/node_modules/
+backend/functions/.env*
+backend/functions/.secret*
+backend/*debug.log
+*.log
+dist/
+__pycache__/
+*.pyc
+.DS_Store
+service-account*.json
+serviceAccount*.json
+
+# Setup wizard state and downloaded Firebase app configs
+.setup/
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Temporary AI handoff notes
+CODEX_TODO.md
+LAUNCH_POSTS.md

@@ -1,0 +1,121 @@
+FamilyHelper License
+====================
+
+Copyright (c) 2026 cyc. All rights reserved except as granted below.
+
+Required Notice: Copyright (c) 2026 cyc — FamilyHelper (original author)
+
+FamilyHelper is source-available software. You may use it under the
+PolyForm Noncommercial License 1.0.0 (full text below), subject to the
+Additional Terms in this section. If the Additional Terms conflict with the
+PolyForm text, the Additional Terms control.
+
+Additional Terms
+----------------
+
+1. No store distribution. You may not publish, list, or distribute the
+   software, or any changed version or new work based on it, through any
+   application store or marketplace (including but not limited to Google
+   Play, Samsung Galaxy Store, Huawei AppGallery, Apple App Store, or any
+   third-party APK store) without prior written permission from cyc.
+   To request permission or discuss a partnership: ychen9086@gmail.com
+2. Attribution. Any copy, changed version, or new work must keep the
+   "Required Notice" line above, and any user-visible "About" screen must
+   keep crediting cyc as the original author.
+3. Names. These terms do not grant permission to use the name
+   "FamilyHelper" or the author's name to endorse or promote a different
+   product.
+4. Third-party files keep their own licenses: see THIRD_PARTY_NOTICES.md
+   (for example android/webrtc_patch/ is MIT, the Gradle wrapper is
+   Apache-2.0). These Additional Terms do not apply to those files.
+
+附加條款（中文說明，若與英文有出入以英文為準）
+------------------------------------------------
+
+1. 禁止上架：未經 cyc 書面同意，不得將本軟體或其任何修改版、衍生作品，
+   上架或散布至任何應用程式商店或市集（包括但不限於 Google Play、
+   Galaxy Store、AppGallery、Apple App Store 及第三方 APK 商店）。
+   申請授權或洽談合作：ychen9086@gmail.com
+2. 保留署名：所有副本與衍生作品必須保留上方「Required Notice」，
+   App 內的「關於」畫面必須持續標示原作者為 cyc。
+3. 不授權以「FamilyHelper」或作者名義為其他產品背書或宣傳。
+4. 第三方檔案依各自授權，見 THIRD_PARTY_NOTICES.md。
+
+家庭自行下載、建置、修改並安裝在自己家人的手機上，屬於非商業的個人使用，
+是被允許的。
+
+----------------------------------------------------------------------
+
+# PolyForm Noncommercial License 1.0.0
+
+<https://polyformproject.org/licenses/noncommercial/1.0.0>
+
+## Acceptance
+
+In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.
+
+## Copyright License
+
+The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose.  However, you may only distribute the software according to [Distribution License](#distribution-license) and make changes or new works based on the software according to [Changes and New Works License](#changes-and-new-works-license).
+
+## Distribution License
+
+The licensor grants you an additional copyright license to distribute copies of the software.  Your license to distribute covers distributing the software with changes and new works permitted by [Changes and New Works License](#changes-and-new-works-license).
+
+## Notices
+
+You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with `Required Notice:` that the licensor provided with the software.  For example:
+
+> Required Notice: Copyright Yoyodyne, Inc. (http://example.com)
+
+## Changes and New Works License
+
+The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.
+
+## Patent License
+
+The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.
+
+## Noncommercial Purposes
+
+Any noncommercial purpose is a permitted purpose.
+
+## Personal Uses
+
+Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, is use for a permitted purpose.
+
+## Noncommercial Organizations
+
+Use by any charitable organization, educational institution, public research organization, public safety or health organization, environmental protection organization, or government institution is use for a permitted purpose regardless of the source of funding or obligations resulting from the funding.
+
+## Fair Use
+
+You may have "fair use" rights for the software under the law. These terms do not limit them.
+
+## No Other Rights
+
+These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else.  These terms do not imply any other licenses.
+
+## Patent Defense
+
+If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately. If your company makes such a claim, your patent license ends immediately for work on behalf of your company.
+
+## Violations
+
+The first time you are notified in writing that you have violated any of these terms, or done anything with the software not covered by your licenses, your licenses can nonetheless continue if you come into full compliance with these terms, and take practical steps to correct past violations, within 32 days of receiving notice.  Otherwise, all your licenses end immediately.
+
+## No Liability
+
+***As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.***
+
+## Definitions
+
+The **licensor** is the individual or entity offering these terms, and the **software** is the software the licensor makes available under these terms.
+
+**You** refers to the individual or entity agreeing to these terms.
+
+**Your company** is any legal entity, sole proprietorship, or other kind of organization that you work for, plus all organizations that have control over, are under the control of, or are under common control with that organization.  **Control** means ownership of substantially all the assets of an entity, or the power to direct its management and policies by vote, contract, or otherwise.  Control can be direct or indirect.
+
+**Your licenses** are all the licenses granted to you for the software under these terms.
+
+**Use** means anything you do with the software requiring one of your licenses.
