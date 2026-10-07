@@ -73,7 +73,7 @@
 2. **下載專案並執行設定精靈**
 
    ```bash
-   git clone https://github.com/cyc083/FamilyHelper.git
+   git clone https://github.com/CYC583/FamilyHelper.git
    cd FamilyHelper
    python3 tool/setup.py
    ```

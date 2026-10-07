@@ -73,7 +73,7 @@ You'll need a computer (Mac, Windows or Linux) to set up the backend and build t
 2. **Download the project and run the setup wizard**
 
    ```bash
-   git clone https://github.com/cyc083/FamilyHelper.git
+   git clone https://github.com/CYC583/FamilyHelper.git
    cd FamilyHelper
    python3 tool/setup.py      # Windows: python tool/setup.py
    ```

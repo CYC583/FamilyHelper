@@ -31,5 +31,5 @@ abstract final class AppInfo {
   static const license = 'PolyForm Noncommercial 1.0.0（附加條款：禁止上架商店）';
 
   /// Set to the public GitHub URL once the repository exists.
-  static const repository = 'https://github.com/cyc083/FamilyHelper';
+  static const repository = 'https://github.com/CYC583/FamilyHelper';
 }
