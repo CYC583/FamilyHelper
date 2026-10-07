@@ -8,6 +8,10 @@
 
 > 目前只支援 Android。每個家庭使用自己的 Firebase 後端，資料不會和其他家庭共用。
 
+<p align="center"><img src="docs/images/demo.gif" alt="FamilyHelper 示範" width="560"></p>
+
+<p align="center"><em>示範：配對 → 長輩親自同意 → Android 確認螢幕分享。為了安全，同意畫面禁止截圖，第 4 格為示意圖。</em></p>
+
 | 長輩版首頁 | 長輩版設定 | 家人版首頁 | 家人配對 |
 | --- | --- | --- | --- |
 | ![長輩版首頁](docs/images/host-home.png) | ![長輩版設定](docs/images/host-settings.png) | ![家人版首頁](docs/images/client-home.png) | ![家人配對](docs/images/client-pair.png) |

@@ -8,6 +8,10 @@ The elder's phone shows just two huge buttons: **"Call family"** and **"SOS"**. 
 
 > Android only. Each family runs its own Firebase backend — no data is shared with anyone else.
 
+<p align="center"><img src="docs/images/demo.gif" alt="FamilyHelper demo" width="560"></p>
+
+<p align="center"><em>Demo: pairing → the elder approves → Android confirms screen sharing. The consent screen blocks screenshots for safety, so frame 4 is an illustration.</em></p>
+
 | Elder: home | Elder: settings | Family: home | Family: pairing |
 | --- | --- | --- | --- |
 | ![Elder home](docs/images/host-home.png) | ![Elder settings](docs/images/host-settings.png) | ![Family home](docs/images/client-home.png) | ![Family pairing](docs/images/client-pair.png) |
